@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Black Scholes Calculator</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <header>
+        <h1>Black Scholes Calculator</h1>
+    </header>
+    <main>
+        <div class="search-container">
+            <form action="#" class="search-bar">
+                <span>Stock Price</span><input type="search" id="stock-price" placeholder="Stock Price">
+            </form>
+            <form action="#" class="search-bar">
+                <span>Strike Price</span><input type="search" id="strike-price" placeholder="Strike Price">
+            </form>
+            <form action="#" class="search-bar">
+                <span>Time to Maturity (Days)</span><input type="search" id="time-to-maturity" placeholder="Time to Maturity">
+            </form>
+            <form action="#" class="search-bar">
+                <span>Risk Free Interest Rate (%)</span><input type="search" id="risk-free-rate" placeholder="Risk Free Interest Rate">
+            </form>
+            <form action="#" class="search-bar">
+                <span>Dividend Yield (%)</span><input type="search" id="dividend-yield" placeholder="Dividend Yield">
+            </form>
+            <form action="#" class="search-bar">
+                <span>Volatility (%)</span><input type="search" id="volatility" placeholder="Volatility">
+            </form>
+        </div>
+    </main>
+    <p id="call-option-price"></p>
+
+    <footer>
+        <a href="https://github.com/DaemonCypher" target="_blank">DaemonCypher</a>
+    </footer>
+
+    <script src="index.js"></script>
+</body>
+</html>
