@@ -5,34 +5,184 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Black Scholes Calculator</title>
     <link rel="stylesheet" href="index.css">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
     <header>
         <h1>Black Scholes Calculator</h1>
     </header>
     <main>
-        <div class="search-container">
+        <div class="template-container">
             <form action="#" class="search-bar">
-                <span>Stock Price</span><input type="search" id="stock-price" placeholder="Stock Price">
+                <span>Stock Price</span><input type="search" id="stock-price" placeholder="Stock Price" oninput="updateTable('table-stock-price', this.value)">
             </form>
             <form action="#" class="search-bar">
-                <span>Strike Price</span><input type="search" id="strike-price" placeholder="Strike Price">
+                <span>Strike Price</span><input type="search" id="strike-price" placeholder="Strike Price" oninput="updateTable('table-strike-price', this.value)">
             </form>
             <form action="#" class="search-bar">
-                <span>Time to Maturity (Days)</span><input type="search" id="time-to-maturity" placeholder="Time to Maturity">
+                <span>Time to Maturity (Days)</span><input type="search" id="time-to-maturity" placeholder="Time to Maturity" oninput="updateTable('table-TM', this.value)">
             </form>
             <form action="#" class="search-bar">
-                <span>Risk Free Interest Rate (%)</span><input type="search" id="risk-free-rate" placeholder="Risk Free Interest Rate">
+                <span>Risk Free Interest Rate (%)</span><input type="search" id="risk-free-rate" placeholder="Risk Free Interest Rate" oninput="updateTable('table-RFIR', this.value)">
             </form>
             <form action="#" class="search-bar">
-                <span>Dividend Yield (%)</span><input type="search" id="dividend-yield" placeholder="Dividend Yield">
+                <span>Dividend Yield (%)</span><input type="search" id="dividend-yield" placeholder="Dividend Yield" oninput="updateTable('table-dividend', this.value)">
             </form>
             <form action="#" class="search-bar">
-                <span>Volatility (%)</span><input type="search" id="volatility" placeholder="Volatility">
+                <span>Volatility (%)</span><input type="search" id="volatility" placeholder="Volatility" oninput="updateTable('table-volatility', this.value)">
             </form>
         </div>
     </main>
-    <p id="call-option-price"></p>
+    <div class="template-container">
+        <h2>Results</h2>
+        <p id="call-option-price"></p>
+        <p id="put-option-price"></p>
+    </div>
+    <div class="template-container">
+        <table id="myTable">
+            <thead>
+                <tr>
+                    <th>X axis</th>
+                    <th>Variable</th>
+                    <th>Input Value</th>
+                    <th>From</th>
+                    <th>To</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <input type="radio" name="x" onclick="state()"> 
+                    </td>
+                    <td>Stock Price</td>
+                    <td>
+                        <form action="#" class="search-bar">
+                           <input type="number" id="table-stock-price" value="100" onchange="state()">
+                        </form>
+                    </td>
+                    <td>
+                        <form action="#" class="search-bar">
+                            <input type="number" id="table-stock-price-from" value="0.01" onchange="state()">
+                         </form>
+                    </td>
+                    <td>
+                        <form action="#" class="search-bar">
+                            <input type="number" id="table-stock-price-to" value="500" onchange="state()">
+                         </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" name="x" onclick="state()"> 
+                    </td>
+                    <td>Strike Price</td>
+                    <td>
+                        <form action="#" class="search-bar">
+                           <input type="number" id="table-strike-price" value="100" onchange="state()">
+                        </form>
+                    </td>
+                    <td>
+                        <form action="#" class="search-bar">
+                            <input type="number" id="table-strike-price-from" value="0.01" onchange="state()">
+                         </form>
+                    </td>
+                    <td>
+                        <form action="#" class="search-bar">
+                            <input type="number" id="table-strike-price-to" value="500" onchange="state()">
+                         </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" name="x" onclick="state()"> 
+                    </td>
+                    <td>Time to Maturity (Days)</td>
+                    <td>
+                        <form action="#" class="search-bar">
+                           <input type="number" id="table-TM" value="100" onchange="state()">
+                        </form>
+                    </td>
+                    <td>
+                        <form action="#" class="search-bar">
+                            <input type="number" id="table-TM-from" value="0.01" onchange="state()">
+                         </form>
+                    </td>
+                    <td>
+                        <form action="#" class="search-bar">
+                            <input type="number" id="table-TM-to" value="500" onchange="state()">
+                         </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" name="x" onclick="state()"> 
+                    </td>
+                    <td>Risk Free Interest Rate (%)</td>
+                    <td>
+                        <form action="#" class="search-bar">
+                           <input type="number" id="table-RFIR" value="100" onchange="state()">
+                        </form>
+                    </td>
+                    <td>
+                        <form action="#" class="search-bar">
+                            <input type="number" id="table-RFIR-from" value="0.01" onchange="state()">
+                         </form>
+                    </td>
+                    <td>
+                        <form action="#" class="search-bar">
+                            <input type="number" id="table-RFIR-to" value="500" onchange="state()">
+                         </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" name="x" onclick="state()"> 
+                    </td>
+                    <td>Dividend Yield (%)</td>
+                    <td>
+                        <form action="#" class="search-bar">
+                           <input type="number" id="table-dividend" value="100" onchange="state()">
+                        </form>
+                    </td>
+                    <td>
+                        <form action="#" class="search-bar">
+                            <input type="number" id="table-dividend-from" value="0.01" onchange="state()">
+                         </form>
+                    </td>
+                    <td>
+                        <form action="#" class="search-bar">
+                            <input type="number" id="table-dividend-to" value="500" onchange="state()">
+                         </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="radio" name="x" onclick="state()"> 
+                    </td>
+                    <td>Volatility (%)</td>
+                    <td>
+                        <form action="#" class="search-bar">
+                           <input type="number" id="table-volatility" value="100" onchange="state()">
+                        </form>
+                    </td>
+                    <td>
+                        <form action="#" class="search-bar">
+                            <input type="number" id="table-volatility-from" value="0.01" onchange="state()">
+                         </form>
+                    </td>
+                    <td>
+                        <form action="#" class="search-bar">
+                            <input type="number" id="table-volatility-to" value="500" onchange="state()">
+                         </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="template-container" id="graph-container" style="display:none;">
+        <h2>Graph</h2>
+        <div id="option-chart"></div>
+    </div>
 
     <footer>
         <a href="https://github.com/DaemonCypher" target="_blank">DaemonCypher</a>
